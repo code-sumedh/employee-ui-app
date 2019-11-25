@@ -1,9 +1,65 @@
-﻿<h1>Hi Sam!</h1>
-<p>You're logged in with Angular 7!!</p>
+﻿ <h1>Employee Details</h1>
+<!--<p>You're logged in with Angular 7!!</p>
 <h3>All registered users:</h3>
 <ul>
     <li *ngFor="let user of users">
-        <!-- {{user.username}} ({{user.firstName}} {{user.lastName}}) -->
+        {{user.username}} ({{user.firstName}} {{user.lastName}}) 
         - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
     </li>
-</ul>
+</ul> -->
+<div class="row">&nbsp;</div>
+<div class="row" *ngIf="users && users.length; else noEmployees">
+    <mat-table #table [dataSource]="dataSource">
+    
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{dataSource.filteredData.indexOf(element) + 1}} </mat-cell>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="firstName">
+              <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+            </ng-container>
+        
+            <!-- Weight Column -->
+            <ng-container matColumnDef="lastName">
+              <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+            </ng-container>
+    
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="gender">
+                <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+            </ng-container>
+          
+        
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="department">
+              <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.department}} </mat-cell>
+            </ng-container>
+    
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="dob">
+                <mat-header-cell *matHeaderCellDef> DOB </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.dob | date: 'dd-MM-yyyy'}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="delete">
+                    <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> <span><i class="fa fa-trash"></i></span></mat-cell>
+                </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+</div>
+
+<ng-template #noEmployees><div class="default-message text-center">No Employee details found, Please register!</div></ng-template>

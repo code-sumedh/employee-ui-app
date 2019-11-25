@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.default-message {
+    color: #fa1d00 !important;
+    font-size: 1.4em !important;
+    font-family: Lato !important;
+    text-align: center !important;
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: #e9ecef !important;
+    font-family: Lato !important;
+    color: #00303f !important;
+}

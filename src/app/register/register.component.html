@@ -15,19 +15,28 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="gender">Department</label>
+        <select [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" class="custom-select" formControlName="gender">
+            <option value="" disabled>Choose your Gender</option>
+            <option *ngFor="let d of genderList" [ngValue]="d">{{d}}</option>
+        </select>
+        <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+            <div *ngIf="f.gender.errors.required">Department is required</div>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="department">Department</label>
         <select [ngClass]="{ 'is-invalid': submitted && f.department.errors }" class="custom-select" formControlName="department">
                 <option value="" disabled>Choose your department</option>
                 <option *ngFor="let d of depts" [ngValue]="d">{{d}}</option>
              </select>
         <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
-            <div *ngIf="f.department.errors.required">Username is required</div>
+            <div *ngIf="f.department.errors.required">Department is required</div>
         </div>
     </div>
     <div class="form-group">
         <label for="dob">DOB</label>
-        <ejs-datepicker id='dob' [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" [value]='dateValue' placeholder='Select a Date'></ejs-datepicker>
-        <!-- <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" /> -->
+        <ejs-datepicker id='dob' [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" formControlName="dob" [value]='dateValue' placeholder='Select a Date'></ejs-datepicker>
         <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
             <div *ngIf="f.dob.errors.required">DOB is required</div>
         </div>

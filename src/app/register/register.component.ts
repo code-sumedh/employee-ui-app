@@ -11,6 +11,7 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
     depts: any = ['IT', 'Network and Cloud', 'AI', 'Machine Learning'];
+    genderList = ['MALE', 'FEMALE', 'UNKNOWN'];
     public dateValue: Date = new Date ();
 
     constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService,
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             department: ['', Validators.required],
-            dob: ['', [Validators.required]]
+            dob: ['', [Validators.required]],
+            gender: ['', [Validators.required]]
         });
     }
 
@@ -30,10 +32,9 @@ export class RegisterComponent implements OnInit {
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
-        console.log(this.registerForm.value);
         const format = 'yyyy-MM-dd HH:mm';
         const locale = 'en-US';
-        const formattedDate = formatDate(this.dateValue, format, locale);
+        const formattedDate = formatDate(this.registerForm.get('dob').value, format, locale);
         this.registerForm.controls['dob'].setValue(formattedDate);
         this.submitted = true;
 
@@ -41,7 +42,9 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
-
+        
+        this.registerForm.controls['firstName'].setValue(this.registerForm.get('firstName').value.charAt(0).toUpperCase() + this.registerForm.get('firstName').value.slice(1));
+        this.registerForm.controls['lastName'].setValue(this.registerForm.get('lastName').value.charAt(0).toUpperCase() + this.registerForm.get('lastName').value.slice(1));
         this.loading = true;
         this.userService.register(this.registerForm.value)
             .pipe(first())

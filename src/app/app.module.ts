@@ -10,14 +10,18 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { DatePickerModule } from '@syncfusion/ej2-angular-calendars';
+import {MatTableModule} from '@angular/material/table';
+import { MaterialModule } from './material.module'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
     imports: [
         BrowserModule,
         DatePickerModule,
         ReactiveFormsModule,
-        HttpClientModule,
-        routing
+        HttpClientModule, MaterialModule,
+        routing, MatTableModule, BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
